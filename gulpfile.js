@@ -14,7 +14,7 @@ var insert = require('gulp-insert');
 // we define some constants here so they can be reused
 const SRC  = '../ccm-components';
 const DEST = '../ccm-components/dist';
-const SERVER_URL = 'http://mkaul.github.io/ccm-components/';
+const SERVER_URL = 'http://mkaul.github.io/ccm-components/dist/';
 
 gulp.task('default', ['js', 'css', 'json']);
 
