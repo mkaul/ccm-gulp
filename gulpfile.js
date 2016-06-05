@@ -26,6 +26,7 @@ gulp.task('default', [ 'js', 'css', 'json', 'doc' ]);
 
 gulp.task('doc', function (cb) {
   // http://usejsdoc.org
+  var config = require('./jsdoc.json');
   var nSrc=0, nDes=0;
   gulp.src( glob_pattern('js'), {read: false} )
     .on("data", function() { nSrc+=1;})
@@ -36,7 +37,7 @@ gulp.task('doc', function (cb) {
       gutil.log("# src files: ", nSrc);
       gutil.log("# dest files:", nDes);
     })
-    .pipe(jsdoc(cb));
+    .pipe(jsdoc(config, cb));
     // .pipe(gulp.dest(API));  // ToDo move API folder to the right place but callback last
 });
 
