@@ -19,17 +19,17 @@ var gutil = require('gulp-util');
 const SRC  = '../ccm-components';
 const SRC2 = 'external_components';
 const DEST = '../ccm-components/dist';
-const API  = '../ccm-components/api';
+const API  = './docs'; // in jsdoc.config
 const SERVER_URL = 'http://mkaul.github.io/ccm-components/dist/';
 
 gulp.task('default', [ 'js', 'css', 'json', 'doc' ]);
 
 gulp.task('doc', function (cb) {
   // http://usejsdoc.org
-  var nSrc=0, nDes=0, dest="build/js";
+  var nSrc=0, nDes=0;
   gulp.src( glob_pattern('js'), {read: false} )
     .on("data", function() { nSrc+=1;})
-    // .pipe(changed(DEST)) //filter out src files not newer than dest
+    // .pipe(changed(API)) //filter out src files not newer than dest
     .on("data", function() { nDes+=1;})
     .on("finish", function() {
       gutil.log("Results");
@@ -37,7 +37,7 @@ gulp.task('doc', function (cb) {
       gutil.log("# dest files:", nDes);
     })
     .pipe(jsdoc(cb));
-    // .pipe(gulp.dest(API));
+    // .pipe(gulp.dest(API));  // ToDo move API folder to the right place but callback last
 });
 
 gulp.task('js', function() {
