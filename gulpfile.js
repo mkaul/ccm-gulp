@@ -12,14 +12,33 @@ var uglifycss = require('gulp-uglifycss');
 var jsonminify = require('gulp-jsonminify');
 var replace = require('gulp-replace');
 var insert = require('gulp-insert');
+var jsdoc = require('gulp-jsdoc3');
+var gutil = require('gulp-util');
 
 // we define some constants here so they can be reused
 const SRC  = '../ccm-components';
 const SRC2 = 'external_components';
 const DEST = '../ccm-components/dist';
+const API  = '../ccm-components/api';
 const SERVER_URL = 'http://mkaul.github.io/ccm-components/dist/';
 
-gulp.task('default', ['js', 'css', 'json']);
+gulp.task('default', [ 'js', 'css', 'json', 'doc' ]);
+
+gulp.task('doc', function (cb) {
+  // http://usejsdoc.org
+  var nSrc=0, nDes=0, dest="build/js";
+  gulp.src( glob_pattern('js'), {read: false} )
+    .on("data", function() { nSrc+=1;})
+    // .pipe(changed(DEST)) //filter out src files not newer than dest
+    .on("data", function() { nDes+=1;})
+    .on("finish", function() {
+      gutil.log("Results");
+      gutil.log("# src files: ", nSrc);
+      gutil.log("# dest files:", nDes);
+    })
+    .pipe(jsdoc(cb));
+    // .pipe(gulp.dest(API));
+});
 
 gulp.task('js', function() {
   gulp.src(glob_pattern('js'))

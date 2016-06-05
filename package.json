@@ -11,6 +11,7 @@
     "gulp-git": "^1.7.2",
     "gulp-insert": "^0.5.0",
     "gulp-jscs": "^3.0.2",
+    "gulp-jsdoc3": "^0.3.0",
     "gulp-jsonminify": "^1.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
