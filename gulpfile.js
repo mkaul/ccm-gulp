@@ -16,19 +16,22 @@ var jsdoc = require('gulp-jsdoc3');
 var gutil = require('gulp-util');
 
 // we define some constants here so they can be reused
-const SRC  = '../ccm-components';
+const USER = 'akless';
+const REPO =  'ccm-developer';
+const SRC  = '../' + REPO + '/';
+const DEST = '../' + REPO + '-page/resources/';
 const SRC2 = 'external_components';
-const DEST = '../ccm-components/dist';
 const API  = './docs'; // in jsdoc.config
-const SERVER_URL = 'http://mkaul.github.io/ccm-components/dist/';
+const SERVER_URL = 'http://' + USER + '.github.io/' + REPO + '/resources/';
 
 gulp.task('default', [ 'js', 'css', 'json', 'doc' ]);
 
 gulp.task('doc', function (cb) {
   // http://usejsdoc.org
   var config = require('./jsdoc.json');
+  config.opts.destination = '../'+REPO+'-page/api/';
   var nSrc=0, nDes=0;
-  gulp.src( glob_pattern('js'), {read: false} )
+  gulp.src( glob_pattern('js'), {read: false} ) // TODO: sub directories...
     .on("data", function() { nSrc+=1;})
     // .pipe(changed(API)) //filter out src files not newer than dest
     .on("data", function() { nDes+=1;})
@@ -47,7 +50,7 @@ gulp.task('js', function() {
     // upfront to be able to figure out which files changed
     .pipe(changed(DEST))
     // only files that has changed will pass through here
-    .pipe(replace('../', SERVER_URL))
+    .pipe(replace('./', SERVER_URL))
     .pipe(uglify())
     // .pipe(rename({
     //   suffix: '.min'
@@ -58,7 +61,7 @@ gulp.task('js', function() {
 gulp.task('css', function () {
   gulp.src(glob_pattern('css'))
     .pipe(changed(DEST))
-    .pipe(replace('../', SERVER_URL))
+    .pipe(replace('./', SERVER_URL))
     .pipe(uglifycss({
       "maxLineLen": 80,
       "uglyComments": true
@@ -72,7 +75,7 @@ gulp.task('css', function () {
 gulp.task('json', function () {
   return gulp.src(glob_pattern('json'))
     .pipe(changed(DEST))
-    .pipe(replace('../', SERVER_URL))
+    .pipe(replace('./', SERVER_URL))
     .pipe(insert.transform(function( contents, file ) {
       return 'ccm.callback[ "' + basename(file.path) + '" ](' + contents + ');';
     }))

@@ -6,7 +6,7 @@
     "excludePattern": "(^|\\/|\\\\)_"
   },
   "opts": {
-    "destination": "../ccm-components/api"
+    "destination": "see gulpfile.js"
   },
   "plugins": [
     "plugins/markdown"
