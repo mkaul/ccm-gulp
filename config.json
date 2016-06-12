@@ -1,0 +1,45 @@
+{
+  "gulp": {
+    "user": "mkaul",
+    "repo": "ccm-components",
+    "exclude_folders": {
+      ".git": true,
+      ".idea": true,
+      "api": true,
+      "dist": true,
+      "fonts": true,
+      "images": true,
+      "javascripts": true,
+      "libs": true,
+      "stylesheets": true
+    },
+    "doc_destination": "-page/resources/",
+    "external_components": "external_components",
+    "server_url": "http://{user}.github.io/{repo}/resources/"
+  },
+
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "destination": "see gulpfile.js - doc task"
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true
+    },
+    "path": "ink-docstrap",
+    "theme": "cerulean",
+    "navType": "vertical",
+    "linenums": true,
+    "dateFormat": "MMMM Do YYYY, h:mm:ss a"
+  }
+}
