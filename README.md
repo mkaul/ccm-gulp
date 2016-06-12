@@ -3,7 +3,7 @@ gulp scripts for ccm components management. gulp writes minified files to the di
 
 For getting started with gulp see [gulp getting-started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
 
-## 1. Installation
+## 1. Install
 
     npm install --global gulp-cli
 
