@@ -11,6 +11,10 @@ For getting started with gulp see [gulp getting-started](https://github.com/gulp
     
     npm install
     
-## 2. Execute
+## 2. Configure
     
+    edit config.json, e.g. enter your user name and repositories  
+    
+## 2. Execute
+        
     gulp

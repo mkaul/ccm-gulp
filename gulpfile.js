@@ -84,18 +84,15 @@ gulp.task('json', function () {
 * generate jsdoc3 API documents from comments inside JavaScript files
 * using jsdoc3
 * generate extra gulp task per ccm-component
-* generate extra API documents per ccm-component
+* for generating extra API documents per ccm-component
 * ************************************ */
 
-var exclude_folders = config.gulp.exclude_folders;
-
-var folders = getFolders(SRC);
+// remember list of task names
 var task_names = [];
 
 // iterate over all folders in REPO
-folders.map(function(folder) {
+getFolders(SRC).map(function(folder) {
   if ( !folder || folder.length === 0 ) return;
-  // console.log('>>> ' + path.join(SRC, folder, '/*.js'));
   var sub_config = JSON.parse(JSON.stringify(config)); // separate deep copy for each folder
   sub_config.opts.destination = '../'+REPO+'-page/api/' + folder;
   var task_name = 'doc_' + folder;
@@ -103,14 +100,14 @@ folders.map(function(folder) {
 
   // generate extra gulp task per ccm-component, e.g. doc_blank
   return gulp.task( task_name, function (cb) {
-    gulp.src([SRC + '/' + folder + '/*.js'], {read: false})
+    gulp.src( [ path.join(SRC, folder, '*.js') ], {read: false} )
       .on('error', gutil.log)
-      .pipe(jsdoc(sub_config, cb));
+      .pipe(jsdoc( sub_config, cb ));
   });
 });
 
 gulp.task('doc', function (done) {
-  runSequence(task_names, function () { // TODO to be replaced in gulp 4
+  runSequence(task_names, function () { // TODO runSequence to be replaced in gulp 4
     console.log('=== doc task ready ===');
     done();
   });
@@ -127,7 +124,7 @@ function basename( file_path ){
 function getFolders(dir) {
   return fs.readdirSync(dir)
     .filter(function(file) {
-      return !exclude_folders[file] && fs.statSync(path.join(dir, file)).isDirectory();
+      return ! config.gulp.exclude_folders[ file ] && fs.statSync(path.join( dir, file )).isDirectory();
     });
 }
 
