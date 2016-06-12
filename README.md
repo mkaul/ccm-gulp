@@ -13,8 +13,8 @@ For getting started with gulp see [gulp getting-started](https://github.com/gulp
     
 ## 2. Configure
     
-    edit config.json, e.g. enter your user name and repositories  
+    edit config.json # e.g. enter your user name and repositories  
     
-## 2. Execute
+## 3. Execute
         
     gulp
