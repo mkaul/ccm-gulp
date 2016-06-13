@@ -13,7 +13,9 @@
       "libs": true,
       "stylesheets": true
     },
-    "doc_destination": "-page/resources/",
+    "repo_suffix": "-page",
+    "api_dirname": "api",
+    "destination": "resources/",
     "external_components": "external_components",
     "server_url": "http://{user}.github.io/{repo}/resources/"
   },

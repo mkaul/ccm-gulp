@@ -27,16 +27,16 @@ var runSequence = require('run-sequence');
 const USER = config.gulp.user;
 const REPO = config.gulp.repo;
 const SRC  = path.join( '..', REPO );
-const DEST = path.join( '..', REPO + config.gulp.doc_destination );
+const DEST = path.join( '..', REPO + config.gulp.repo_suffix, config.gulp.destination );
 const SRC2 = config.gulp.external_components;
 const SERVER_URL = param_replace( config.gulp.server_url, {'user': USER, 'repo': REPO } );
 
-gulp.task('default', [ 'js', 'css', 'json', 'doc' ]);
+gulp.task('default', [ 'js', 'css', 'json', 'doc', 'api' ]);
 
 // remotify JavaScript files by replacing local paths by remote paths
 // minify JavaScript files after remotifying
 gulp.task('js', function() {
-  gulp.src(glob_pattern('js'))
+  return gulp.src(glob_pattern('js'))
     // the `changed` task needs to know the destination directory
     // upfront to be able to figure out which files changed
     // .pipe(changed(DEST))
@@ -60,7 +60,7 @@ gulp.task('js', function() {
 
 // minify CSS files
 gulp.task('css', function () {
-  gulp.src(glob_pattern('css'))
+  return gulp.src(glob_pattern('css'))
     // .pipe(changed(DEST))
     // .pipe(replace('../', SERVER_URL))
     .pipe(replace({
@@ -113,13 +113,14 @@ gulp.task('json', function () {
 * ************************************ */
 
 // remember list of task names
+var folders = getFolders(SRC);
 var task_names = [];
 
 // iterate over all folders in REPO
-getFolders(SRC).map(function(folder) {
+folders.map(function(folder) {
   if ( !folder || folder.length === 0 ) return;
   var sub_config = JSON.parse(JSON.stringify(config)); // separate deep copy for each folder
-  sub_config.opts.destination = '../'+REPO+'-page/api/' + folder;
+  sub_config.opts.destination = path.join('..', REPO + config.gulp.repo_suffix, config.gulp.api_dirname, folder);
   var task_name = 'doc_' + folder;
   task_names.push( task_name );
 
@@ -136,6 +137,26 @@ gulp.task('doc', function (done) {
     console.log('=== doc task ready ===');
     done();
   });
+});
+
+// write api index into index.html file of github.io home page
+gulp.task('api', function (done) {
+  var index_dir = SRC + config.gulp.repo_suffix;
+  return gulp.src( path.join( index_dir, 'index.html' )  )
+    .pipe(replace({
+      patterns: [
+        {
+          match: /<!-- api_begin -->.*?<!-- api_end -->/gim,
+          replacement: folders.reduce(function( list, component ) {
+            return list + '<li><a href="api/' + component +
+              '/index.html" target="_blank">' + component +
+              ' API</a>' +
+              '</li>';
+          }, '<!-- api_begin -->') + '<!-- api_end -->'
+        }
+      ]
+    }))
+    .pipe(gulp.dest( index_dir ));
 });
 
 function glob_pattern(suffix){
@@ -158,8 +179,3 @@ function param_replace( param_string, replace_object ) {
     return param in replace_object ? replace_object[param] : match;
   });
 }
-
-
-/* ************** test ************** */
-
-console.log( "../abc/abc.js".replace('../', SERVER_URL) );
