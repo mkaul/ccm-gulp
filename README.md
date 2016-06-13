@@ -18,3 +18,8 @@ For getting started with gulp see [gulp getting-started](https://github.com/gulp
 ## 3. Execute
         
     gulp
+    
+    
+# Conventions over Configuration
+Use relative paths in your ccm component files as '../' + directory_name + '/' + file_name. Then you can test your implementation locally.
+Deployment via gulp includes remotification, which is a replacement of all local paths by absolute paths.

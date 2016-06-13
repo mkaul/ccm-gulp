@@ -41,7 +41,7 @@ gulp.task('js', function() {
     .pipe(changed(DEST))
     // only files that has changed will pass through here
     // replace local paths by remote paths
-    .pipe(replace('./', SERVER_URL))
+    .pipe(replace('../', SERVER_URL))
     .pipe(uglify())
     // .pipe(rename({
     //   suffix: '.min'
@@ -53,7 +53,7 @@ gulp.task('js', function() {
 gulp.task('css', function () {
   gulp.src(glob_pattern('css'))
     .pipe(changed(DEST))
-    .pipe(replace('./', SERVER_URL))
+    .pipe(replace('../', SERVER_URL))
     .pipe(uglifycss({
       "maxLineLen": 80,
       "uglyComments": true
@@ -68,7 +68,7 @@ gulp.task('css', function () {
 gulp.task('json', function () {
   return gulp.src(glob_pattern('json'))
     .pipe(changed(DEST))
-    .pipe(replace('./', SERVER_URL))
+    .pipe(replace('../', SERVER_URL))
     .pipe(insert.transform(function( contents, file ) {
       return 'ccm.callback[ "' + basename(file.path) + '" ](' + contents + ');';
     }))
