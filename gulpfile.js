@@ -15,7 +15,8 @@ var rename = require('gulp-rename');
 var git = require('gulp-git');
 var uglifycss = require('gulp-uglifycss');
 var jsonminify = require('gulp-jsonminify');
-var replace = require('gulp-replace');
+// var replace = require('gulp-replace');
+var replace = require('gulp-replace-task');
 var insert = require('gulp-insert');
 var jsdoc = require('gulp-jsdoc3');
 var gutil = require('gulp-util');
@@ -133,3 +134,8 @@ function param_replace( param_string, replace_object ) {
     return param in replace_object ? replace_object[param] : match;
   });
 }
+
+
+/* ************** test ************** */
+
+console.log( "../abc/abc.js".replace('../', SERVER_URL) );
