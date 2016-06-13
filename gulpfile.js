@@ -39,10 +39,18 @@ gulp.task('js', function() {
   gulp.src(glob_pattern('js'))
     // the `changed` task needs to know the destination directory
     // upfront to be able to figure out which files changed
-    .pipe(changed(DEST))
+    // .pipe(changed(DEST))
     // only files that has changed will pass through here
     // replace local paths by remote paths
-    .pipe(replace('../', SERVER_URL))
+    // .pipe(replace('../', SERVER_URL))
+    .pipe(replace({
+      patterns: [
+        {
+          match: /\.\.\//g,
+          replacement: SERVER_URL
+        }
+      ]
+    }))
     .pipe(uglify())
     // .pipe(rename({
     //   suffix: '.min'
@@ -53,8 +61,16 @@ gulp.task('js', function() {
 // minify CSS files
 gulp.task('css', function () {
   gulp.src(glob_pattern('css'))
-    .pipe(changed(DEST))
-    .pipe(replace('../', SERVER_URL))
+    // .pipe(changed(DEST))
+    // .pipe(replace('../', SERVER_URL))
+    .pipe(replace({
+      patterns: [
+        {
+          match: /\.\.\//g,
+          replacement: SERVER_URL
+        }
+      ]
+    }))
     .pipe(uglifycss({
       "maxLineLen": 80,
       "uglyComments": true
@@ -68,8 +84,16 @@ gulp.task('css', function () {
 // minify JSON files
 gulp.task('json', function () {
   return gulp.src(glob_pattern('json'))
-    .pipe(changed(DEST))
-    .pipe(replace('../', SERVER_URL))
+    // .pipe(changed(DEST))
+    // .pipe(replace('../', SERVER_URL))
+    .pipe(replace({
+      patterns: [
+        {
+          match: /\.\.\//g,
+          replacement: SERVER_URL
+        }
+      ]
+    }))
     .pipe(insert.transform(function( contents, file ) {
       return 'ccm.callback[ "' + basename(file.path) + '" ](' + contents + ');';
     }))
