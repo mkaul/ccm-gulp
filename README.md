@@ -22,18 +22,13 @@ For getting started with gulp see [gulp getting-started](https://github.com/gulp
     
 # Convention over Configuration
 - Use *relative paths* in your ccm component files such as `'../' + directory_name + '/' + file_name`, so that you can test your implementation locally. Deployment via ccm-gulp includes remotification (via task `gulp js`), which performs a replacement of all local paths by *absolute paths*.
-
 - Use GitHub Hosting under `http://USER.github.io/ccm-components` for your ccm components, see ["Project Pages site owned by a user account"](https://help.github.com/articles/user-organization-and-project-pages/).
- 
 - Use `resources` for storing your remotified ccm components.
- 
-- Use `api` for storing the API documentation of your ccm components.
-
+- Use `api` for storing the API documentation of your ccm components 
 - Download the `gh-pages` branch of your Project Pages site into a neigbour folder called `ccm-components-page`.
-
 - run `gulp` for updating your remotified ccm components and their documentation. 
 
-- If your GitHub Repository is `https://github.com/USER/ccm-components`, you can generate your ["Project Pages site owned by a user account"](https://help.github.com/articles/user-organization-and-project-pages/), which will be hosted under `http://USER.github.io/ccm-components`. The project pages are stored in the branch `gh-pages` in the same project repo. If you download the `gh-pages` branch of your Project Pages site into a neigbour folder called `ccm-components-page`, the gulp task `gulp js` will generate remotified components into the `resources` subdirectory underneath the `ccm-components-page` directory, the gulp task `gulp doc` will generate API documentation into the `api` subdirectory underneath the `ccm-components-page` directory. Otherwise reconfigure `config.json` to adapt to your structure.
+If your GitHub Repository is `https://github.com/USER/ccm-components`, you can generate your ["Project Pages site owned by a user account"](https://help.github.com/articles/user-organization-and-project-pages/), which will be hosted under `http://USER.github.io/ccm-components`. The project pages are stored in the branch `gh-pages` in the same project repo. If you download the `gh-pages` branch of your Project Pages site into a neigbour folder called `ccm-components-page`, the gulp task `gulp js` will generate remotified components into the `resources` subdirectory underneath the `ccm-components-page` directory, the gulp task `gulp doc` will generate API documentation into the `api` subdirectory underneath the `ccm-components-page` directory. Otherwise reconfigure `config.json` to adapt to your structure.
  
 # Other Configurations
 Other Configurations may be added to `config.json` oder `gulpfile.js`  directly.
