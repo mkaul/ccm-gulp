@@ -146,7 +146,7 @@ gulp.task('api', function (done) {
     .pipe(replace({
       patterns: [
         {
-          match: /<!-- api_begin -->.*?<!-- api_end -->/gim,
+          match: /<!-- api_begin -->.*?<!-- api_end -->/im,
           replacement: folders.reduce(function( list, component ) {
             return list + '<li><a href="api/' + component +
               '/index.html" target="_blank">' + component +
