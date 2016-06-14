@@ -15,6 +15,7 @@
     },
     "repo_suffix": "-page",
     "api_dirname": "api",
+    "index_file": "index.html",
     "destination": "resources/",
     "external_components": "external_components",
     "server_url": "http://{user}.github.io/{repo}/resources/"

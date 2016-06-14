@@ -142,14 +142,14 @@ gulp.task('doc', function (done) {
 // write api index into index.html file of github.io home page
 gulp.task('api', function (done) {
   var index_dir = SRC + config.gulp.repo_suffix;
-  return gulp.src( path.join( index_dir, 'index.html' )  )
+  return gulp.src( path.join( index_dir, config.gulp.index_file )  )
     .pipe(replace({
       patterns: [
         {
           match: /<!-- api_begin -->.*?<!-- api_end -->/im,
           replacement: folders.reduce(function( list, component ) {
             return list + '<li><a href="api/' + component +
-              '/index.html" target="_blank">' + component +
+              '/' + config.gulp.index_file + '" target="_blank">' + component +
               ' API</a>' +
               '</li>';
           }, '<!-- api_begin -->') + '<!-- api_end -->'
