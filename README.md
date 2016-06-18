@@ -5,11 +5,15 @@ For getting started with gulp see [gulp getting-started](https://github.com/gulp
 
 ## 1. Install
 
-    npm install --global gulp-cli
+    npm install --global gulp-cli  
 
     git clone https://github.com/mkaul/ccm-gulp.git
     
+    cd ccm-gulp
+    
     npm install
+ 
+For the node.js and npm installation, see [how-to-install-npm](http://blog.npmjs.org/post/85484771375/how-to-install-npm). According to your npm installation, maybe the first command needs "sudo npm install -g gulp-cli". 
     
 ## 2. Configure
     
