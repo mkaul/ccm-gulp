@@ -148,7 +148,7 @@ gulp.task('api', function (done) {
         {
           match: /<!-- api_begin -->.*?<!-- api_end -->/im,
           replacement: folders.reduce(function( list, component ) {
-            return list + '<li><a href="api/' + component +
+            return list + '<li><a href="' + config.gulp.api_dirname + '/' + component +
               '/' + config.gulp.index_file + '" target="_blank">' + component +
               ' API</a>' +
               '</li>';
