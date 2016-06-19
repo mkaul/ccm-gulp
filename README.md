@@ -16,6 +16,9 @@ For getting started with gulp see [gulp getting-started](https://github.com/gulp
 For the node.js and npm installation, see [how-to-install-npm](http://blog.npmjs.org/post/85484771375/how-to-install-npm). According to your npm installation, maybe the first command needs "sudo npm install -g gulp-cli". 
     
 ## 2. Configure
+Download your [GitHub Pages](https://pages.github.com) into a local directory called `ccm-components-page` as a neighbour directory next to `ccm-components`. 
+    
+    git clone -b gh-pages --single-branch https://github.com/USER/ccm-components.git ccm-components-page
     
     edit config.json # e.g. enter your user name and repositories  
     
